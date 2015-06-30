@@ -1,0 +1,71 @@
+@import "../font-awesome-4.3.0/css/font-awesome.min.css";
+
+html, body {
+    font-size: 21px;
+    overflow: hidden;
+}
+
+@font-face {
+  font-family: "Ubuntu", serif;
+  src: local("Ubuntu"),
+       url(http://fonts.googleapis.com/css?family=Ubuntu:400,300,700,500);
+}
+
+input {
+  width: 100%;
+  border: 1px solid #000;
+  margin-bottom: 0;
+  padding: 4px 6px 4px 6px;
+  font-size: 1em;
+}
+
+.navigation {
+    margin-top: 0;
+    border: 1px solid black;
+    border-top: 0;
+    max-height: 390px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+}
+
+.navigation li {
+    cursor: pointer;
+    padding: 4px 6px 4px 6px;
+    display: flex;
+    flex-direction: row;
+}
+
+.navigation li h1 {
+    font-size: 0.8em;
+    margin: 0;
+    white-space: nowrap;
+    font-weight: lighter;
+}
+
+.navigation li h2 {
+    font-size: 0.6em;
+    margin: 0;
+    white-space: nowrap;
+    font-weight: lighter;
+}
+
+.navigation .selected {
+    background-color: #334466;
+    color: white;
+}
+
+.navigation .ga-li-main {
+    flex-grow: 2;
+    margin-left: 6px;
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: 16px, auto, contain;
+    overflow: hidden;
+}
+
+.navigation .ga-icon {
+    margin-top: 0.2em;
+}
+
+/*Font Awesome by Dave Gandy - http://fontawesome.io*/

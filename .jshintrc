@@ -1,0 +1,9 @@
+{
+    "esnext": true,
+    "globalstrict": true,
+    "globals": {
+        "self": true,
+        "require": true,
+        "KeyEvent": true
+    }
+}

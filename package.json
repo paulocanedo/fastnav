@@ -1,0 +1,13 @@
+{
+  "title": "Fast Navigation",
+  "name": "fastnav",
+  "version": "0.4.55",
+  "description": "An add-on that provide you all functionalities at same place, Just press Ctrl+Shift+Space",
+  "main": "index.js",
+  "author": "Paulo Canedo",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT"
+}
