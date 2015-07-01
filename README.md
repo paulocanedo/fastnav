@@ -15,17 +15,17 @@ An add-on that allows you access any action with a single a place
 - New Window
 - Add-ons Manager
 - Downloads
-
-##Actions planned
-- About Firefox
 - App Manager
-- Customize Firefox UI
 - Firefox Sync accounts
+- Customize Firefox UI
 - Home
-- New Private Window
 - Permissions
 - Plugins
 - Troubleshooting Information
+
+##Actions planned
+- About Firefox
+- New Private Window
 - Zoom In
 - Zoom Out
 

@@ -34,16 +34,10 @@
     actionsCache.push(createAction('cmd_go-forward',  `Go Forward`, `Go to Forward Location`, 'normal', 'arrow-right'));
     actionsCache.push(createAction('cmd_show-about',  `About Fast Navigation`, `Show About Dialog`, 'normal', 'fighter-jet'));
     actionsCache.push(createAction('cmd_exit',        `Quit`, `Quit Firefox Application`, 'normal', 'times-circle'));
-
-    // - About Firefox
-    // - App Manager
-    // - Customize Firefox UI
-    // - Firefox Sync accounts
-    // - Home
-    // - New Private Window
-    // - Permissions
-    // - Plugins
-    // - Troubleshooting Information
-    // - Zoom In
-    // - Zoom Out
+    actionsCache.push(createAction('cmd_ffsync',      `Firefox Sync Accounts`, `Open Firefox Sync Accounts`, 'normal'));
+    actionsCache.push(createAction('cmd_custom-ui',   `Customize Firefox UI`, `Customize Firefox User Interface`, 'normal'));
+    actionsCache.push(createAction('cmd_home',        `Home`, `Go to Home`, 'normal'));
+    actionsCache.push(createAction('cmd_permissions', `Permissions`, `Manage Firefox Permissions`, 'normal'));
+    actionsCache.push(createAction('cmd_plugins',     `About Plugins`, `Open Plugins Tab`, 'normal'));
+    actionsCache.push(createAction('cmd_ff-support',  `Troubleshooting Information`, `Open Troubleshooting Information Tab`, 'normal'));
 })();

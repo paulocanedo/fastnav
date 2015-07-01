@@ -162,6 +162,24 @@ resultPanel.port.on('action-performed', (action, text) => {
         case 'cmd_show-about':
             aboutPanel.show();
             break;
+        case 'cmd_ffsync':
+            tabs.open('about:accounts');
+            break;
+        case 'cmd_custom-ui':
+            tabs.open('about:customizing');
+            break;
+        case 'cmd_home':
+            tabs.open('about:home');
+            break;
+        case 'cmd_permissions':
+            tabs.open('about:permissions');
+            break;
+        case 'cmd_plugins':
+            tabs.open('about:plugins');
+            break;
+        case 'cmd_ff-support':
+            tabs.open('about:support');
+            break;
 
         default:
     }
