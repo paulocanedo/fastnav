@@ -16,7 +16,7 @@ tabs.on('ready', (tab) => {
     resultPanel.port.emit('tab-ready', {
         tabId: tab.id,
         title: tab.title,
-        description: tab.url
+        url:   tab.url
     });
 
     getFavicon(tab).then((url) => {
@@ -28,7 +28,7 @@ tabs.on('open', (tab) => {
     resultPanel.port.emit('tab-opened', {
         tabId: tab.id,
         title: tab.title,
-        description: tab.url
+        url:   tab.url
     });
 });
 

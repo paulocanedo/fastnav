@@ -7,8 +7,9 @@
     const searchField = fastnav.searchField;
 
     self.port.on('tab-opened', (elem) => {
-        let action = createAction('cmd_activate', elem.title, elem.description, 'tab', 'angle-double-right');
+        let action = createAction('cmd_activate', elem.title, elem.url, 'tab', 'angle-double-right');
         action.tabId = elem.tabId;
+        action.url = elem.url;
 
         let tabs = actions.get('tabs');
         tabs.add(action);
@@ -26,7 +27,7 @@
         let action = actions.get('findByTabId')(elem.tabId);
 
         action.title = elem.title;
-        action.description = elem.description;
+        action.description = elem.url;
         action.url = elem.url;
         action.refreshDOM();
     });

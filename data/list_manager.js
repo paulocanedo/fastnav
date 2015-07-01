@@ -56,8 +56,10 @@
                 let filterActions = (search, collection) => {
                     for(let action of collection) {
                         let title = action.title.toLowerCase();
+                        let url = action.url;
 
-                        if(search === '*all*' || title.indexOf(search) >= 0) {
+                        if(search === '*all*' || title.indexOf(search) >= 0 ||
+                           (url && url.toLowerCase().indexOf(search) >= 0)) {
                             this.actionFiltered(action);
                         }
                     }
