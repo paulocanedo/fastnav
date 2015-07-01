@@ -128,6 +128,9 @@ resultPanel.port.on('action-performed', (action, text) => {
         case 'cmd_newtab':
             tabs.open('about:newtab');
             break;
+        case 'cmd_new-window':
+            tabs.open({url: 'about:newtab', inNewWindow: true});
+            break;
         case 'cmd_open':
             tabs.open(url);
             break;

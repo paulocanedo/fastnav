@@ -11,6 +11,8 @@ An add-on that allows you access any action with a single a place
 - Search in Bookmarks
 - Search in History
 - Switch between opened Tabs
+- Exit
+- New Window
 
 ##Actions planned
 - About Firefox
@@ -21,7 +23,6 @@ An add-on that allows you access any action with a single a place
 - Firefox Sync accounts
 - Home
 - New Private Window
-- New Window
 - Permissions
 - Plugins
 - Troubleshooting Information
