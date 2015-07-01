@@ -10,6 +10,7 @@ const { data }       = require("sdk/self");
 const { getFavicon } = require("sdk/places/favicon");
 
 var resultPanel = null;
+var aboutPanel = null;
 
 tabs.on('ready', (tab) => {
     resultPanel.port.emit('tab-ready', {
@@ -54,6 +55,16 @@ resultPanel = require("sdk/panel").Panel({
   ]
 });
 
+aboutPanel = require("sdk/panel").Panel({
+  width:  720,
+  height: 450,
+  contentURL: data.url("about.html"),
+  contentScriptFile: [
+      data.url("module.js")
+  ],
+  // contentStyleFile: data.url("style/fastnav.css")
+});
+
 //button to start add-on
 action.ActionButton({
   id: "global-action",
@@ -85,6 +96,7 @@ for(let tab of tabs) {
     });
 }
 
+resultPanel.on('show', () => resultPanel.port.emit('show'));
 
 resultPanel.port.on('get-history', text => {
     history.search(
@@ -103,8 +115,6 @@ resultPanel.port.on('get-bookmarks', text => {
         resultPanel.port.emit('get-bookmarks-ready', results);
     });
 });
-
-resultPanel.on('show', () => resultPanel.port.emit('show'));
 
 resultPanel.port.on('action-performed', (action, text) => {
     let { id, command, url } = action;
@@ -137,6 +147,10 @@ resultPanel.port.on('action-performed', (action, text) => {
                 }
             }
             break;
+        case 'cmd_show-about':
+            aboutPanel.show();
+            break;
+
         default:
 
     }
