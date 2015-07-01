@@ -6,8 +6,8 @@ const tabs           = require('sdk/tabs');
 const action         = require('sdk/ui/button/action');
 const history        = require("sdk/places/history");
 const bookmarks      = require("sdk/places/bookmarks");
-const { data }       = require("sdk/self");
 const { getFavicon } = require("sdk/places/favicon");
+const { name, version, data } = require("sdk/self");
 
 var resultPanel = null;
 var aboutPanel = null;
@@ -59,9 +59,7 @@ aboutPanel = require("sdk/panel").Panel({
   width:  720,
   height: 450,
   contentURL: data.url("about.html"),
-  contentScriptFile: [
-      data.url("module.js")
-  ],
+  contentScriptFile: data.url("about.js"),
   // contentStyleFile: data.url("style/fastnav.css")
 });
 
@@ -97,6 +95,10 @@ for(let tab of tabs) {
 }
 
 resultPanel.on('show', () => resultPanel.port.emit('show'));
+aboutPanel.port.emit('metadata', {
+    name: 'Fast Navigation',
+    version: version
+});
 
 resultPanel.port.on('get-history', text => {
     history.search(
