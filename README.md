@@ -1,4 +1,4 @@
-#Global Action
+#Fast Navigation
 An add-on that allows you access any action with a single a place
 
 ##Actions implemented
@@ -29,12 +29,12 @@ An add-on that allows you access any action with a single a place
 - Zoom Out
 
 ##Tasks
-- *custom icons for each action*
-- *when hold up/down key, repeat navigation*
-- *fix description*
-- *change font face*
-- *implement favorite search*
-- *implement history search*
+- ~~custom icons for each action~~
+- ~~when hold up/down key, repeat navigation~~
+- ~~fix description~~
+- ~~change font face~~
+- ~~implement favorite search~~
+- ~~implement history search~~
 - fix favicon position
 - when focus goes to any tab, change the view to that tab
   - if press ESCAPE restore the initial
