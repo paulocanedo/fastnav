@@ -6,7 +6,7 @@
     const titleLabel   = document.getElementById('title');
 
     self.port.on('metadata', mdata => {
-        titleLabel.textContent   = mdata.name;
+        titleLabel.textContent   = mdata.title;
         versionLabel.textContent = mdata.version;
     });
 })();

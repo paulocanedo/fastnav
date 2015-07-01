@@ -15,7 +15,6 @@ An add-on that allows you access any action with a single a place
 - New Window
 - Add-ons Manager
 - Downloads
-- App Manager
 - Firefox Sync accounts
 - Customize Firefox UI
 - Home
