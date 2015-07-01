@@ -13,10 +13,10 @@ An add-on that allows you access any action with a single a place
 - Switch between opened Tabs
 - Exit
 - New Window
+- Add-ons Manager
 
 ##Actions planned
 - About Firefox
-- Add-ons Manager
 - App Manager
 - Customize Firefox UI
 - Downloads

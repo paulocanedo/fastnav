@@ -137,6 +137,9 @@ resultPanel.port.on('action-performed', (action, text) => {
         case 'cmd_open-pref':
             tabs.open('about:preferences');
             break;
+        case 'cmd_addons':
+            tabs.open('about:addons');
+            break;
         case 'cmd_close-tab':
             tabs.activeTab.close();
             break;
