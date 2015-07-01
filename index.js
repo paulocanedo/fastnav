@@ -140,6 +140,9 @@ resultPanel.port.on('action-performed', (action, text) => {
         case 'cmd_addons':
             tabs.open('about:addons');
             break;
+        case 'cmd_downloads':
+            tabs.open('about:downloads');
+            break;
         case 'cmd_close-tab':
             tabs.activeTab.close();
             break;

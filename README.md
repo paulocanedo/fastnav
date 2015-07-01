@@ -14,12 +14,12 @@ An add-on that allows you access any action with a single a place
 - Exit
 - New Window
 - Add-ons Manager
+- Downloads
 
 ##Actions planned
 - About Firefox
 - App Manager
 - Customize Firefox UI
-- Downloads
 - Firefox Sync accounts
 - Home
 - New Private Window
