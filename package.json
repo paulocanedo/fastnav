@@ -6,8 +6,8 @@
   "main": "index.js",
   "author": "Paulo Canedo",
   "engines": {
-    "firefox": ">=38.0a1",
-    "fennec": ">=38.0a1"
+    "firefox": ">=34.0a1",
+    "fennec": ">=34.0a1"
   },
   "license": "MIT"
 }
