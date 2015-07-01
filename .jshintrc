@@ -4,6 +4,7 @@
     "globals": {
         "self": true,
         "require": true,
-        "KeyEvent": true
+        "KeyEvent": true,
+        "fastnav": true
     }
 }

@@ -2,8 +2,6 @@
 
 'use strict';
 
-(() => {
-
 const tabs           = require('sdk/tabs');
 const action         = require('sdk/ui/button/action');
 const history        = require("sdk/places/history");
@@ -43,10 +41,17 @@ resultPanel = require("sdk/panel").Panel({
   height: 450,
   contentURL: data.url("main.html"),
   contentScriptFile: [
-      data.url("global-action.js"),
-      data.url("events.js")
+      data.url("module.js"),
+      data.url("actions.js"),
+      data.url("list_manager.js"),
+      data.url("listeners.js"),
+      data.url("events.js"),
+      data.url("init.js"),
   ],
-  contentStyleFile: data.url("style/global-action.less")
+  contentStyleFile: [
+      data.url("style/fastnav.css"),
+      data.url("style/font-awesome.min.css")
+  ]
 });
 
 //button to start add-on
@@ -137,5 +142,3 @@ resultPanel.port.on('action-performed', (action, text) => {
     }
     resultPanel.hide();
 });
-
-})();

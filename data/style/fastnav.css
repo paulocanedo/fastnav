@@ -1,14 +1,12 @@
-@import "../font-awesome-4.3.0/css/font-awesome.min.css";
-
-html, body {
-    font-size: 21px;
-    overflow: hidden;
-}
-
 @font-face {
   font-family: "Ubuntu", serif;
   src: local("Ubuntu"),
        url(http://fonts.googleapis.com/css?family=Ubuntu:400,300,700,500);
+}
+
+html, body {
+    font-size: 21px;
+    overflow: hidden;
 }
 
 input {
