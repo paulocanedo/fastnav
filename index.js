@@ -6,6 +6,7 @@ const tabs           = require('sdk/tabs');
 const action         = require('sdk/ui/button/action');
 const history        = require("sdk/places/history");
 const bookmarks      = require("sdk/places/bookmarks");
+const system         = require("sdk/system");
 const { getFavicon } = require("sdk/places/favicon");
 const { name, version, data } = require("sdk/self");
 
@@ -154,7 +155,11 @@ resultPanel.port.on('action-performed', (action, text) => {
             break;
 
         default:
-
     }
-    resultPanel.hide();
+
+    if(command === 'cmd_exit') {
+        system.exit();
+    } else {
+        resultPanel.hide();
+    }
 });
