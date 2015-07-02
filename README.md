@@ -1,5 +1,6 @@
 #Fast Navigation
-An add-on that allows you access any action with a single a place
+An add-on that allows you access any action with a single a place.
+Also you can search in history and bookmarks. In a few words, this add-on is a improved location bar.
 
 ##Actions implemented
 - About Fast Navigation
@@ -27,15 +28,3 @@ An add-on that allows you access any action with a single a place
 - New Private Window
 - Zoom In
 - Zoom Out
-
-##Tasks
-- ~~custom icons for each action~~
-- ~~when hold up/down key, repeat navigation~~
-- ~~fix description~~
-- ~~change font face~~
-- ~~implement favorite search~~
-- ~~implement history search~~
-- fix favicon position
-- when focus goes to any tab, change the view to that tab
-  - if press ESCAPE restore the initial
-- merge preferences tab with pref command
