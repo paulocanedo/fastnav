@@ -45,6 +45,7 @@ resultPanel = require("sdk/panel").Panel({
   contentURL: data.url("main.html"),
   contentScriptFile: [
       data.url("module.js"),
+      data.url("observer.js"),
       data.url("actions.js"),
       data.url("list_manager.js"),
       data.url("listeners.js"),

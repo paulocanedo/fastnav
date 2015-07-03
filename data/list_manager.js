@@ -4,6 +4,7 @@
 
 (() => {
     const resultList  = document.getElementById("result-list");
+    const observer = fastnav.observer;
     const actions = fastnav.actions;
 
     const SELECT_NONE = 0;
@@ -13,8 +14,11 @@
     var listManager = (() => {
         var currentList = [];
         var _actionSelected;
+        var _selectedIndex = -1;
 
-        var selectedIndex = -1;
+        observer.subscribe('selectionChanged', (what, param) => {
+            updateSelection(param.oldSelectedIndex, param.selectedIndex);
+        });
 
         var updateSelection = (oldSelectedIndex, selectedIndex) => {
             if(oldSelectedIndex >= 0) {
@@ -32,6 +36,9 @@
         };
 
         return {
+            get selectedIndex() {
+                return _selectedIndex;
+            },
             get actionSelected() {
                 return _actionSelected;
             },
@@ -44,7 +51,7 @@
             },
             update(search = '*all*') {
                 this.moveSelection(SELECT_NONE);
-                
+
                 currentList = [];
                 resultList.innerHTML = '';
 
@@ -78,8 +85,8 @@
                 //todo
             },
             moveSelection(where) {
-                let oldItem = resultList.childNodes.item(selectedIndex);
-                let oldSelectedIndex = selectedIndex;
+                let oldItem = resultList.childNodes.item(_selectedIndex);
+                let oldSelectedIndex = _selectedIndex;
 
                 if(where === SELECT_NONE) {
                     this.noSelection();
@@ -89,24 +96,28 @@
                     this.moveSelectionUp();
                 }
 
-                updateSelection(oldSelectedIndex, selectedIndex);
+                observer.fire('selectionChanged', {
+                    oldSelectedIndex: oldSelectedIndex,
+                    selectedIndex: _selectedIndex
+                });
             },
             moveSelectionDown() {
-                if(selectedIndex + 1 < resultList.childNodes.length) {
-                    selectedIndex++;
+                if(_selectedIndex + 1 < resultList.childNodes.length) {
+                    _selectedIndex++;
                 }
             },
             moveSelectionUp() {
-                if(selectedIndex > 0) {
-                    selectedIndex--;
+                if(_selectedIndex > 0) {
+                    _selectedIndex--;
                 }
             },
             noSelection() {
-                selectedIndex = -1;
+                _selectedIndex = -1;
             }
         };
     })();
 
+    fastnav.resultList   = resultList;
     fastnav.list_manager = listManager;
     fastnav.SELECT_NONE  = SELECT_NONE;
     fastnav.SELECT_DOWN  = SELECT_DOWN;

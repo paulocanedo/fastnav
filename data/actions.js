@@ -4,7 +4,7 @@
 
 (() => {
     const searchField = document.getElementById("search-field");
-    var actions = new Map();
+    const observer = fastnav.observer;
 
     var createAction = (command, title, description, type = 'normal', icon = 'circle-thin') => {
         var _command = command;
@@ -45,6 +45,23 @@
 
         let getTextNonNull = (variable, defaultValue) => {
             return (variable && variable.length > 0) ? variable.toString() : defaultValue;
+        };
+
+        let installListeners = (action) => {
+            let element = action.dom;
+
+            element.addEventListener('mouseenter', evt => installListeners.setSelected(action, true));
+            element.addEventListener('mouseleave', evt => installListeners.setSelected(action, false));
+        };
+
+        installListeners.setSelected = (what, flag) => {
+            what.selected = flag;
+            what.refreshDOM();
+
+            observer.fire('selectionChanged', {
+                oldSelectedIndex: -1,//TODO find it
+                selectedIndex: -1//TODO find it
+            });
         };
 
         return {
@@ -91,6 +108,8 @@
                 });
                 elements.li.setAttribute('global-action-id', this.id);
 
+                installListeners(this);
+
                 domCreated = true;
                 return elements.li;
             },
@@ -115,7 +134,7 @@
         };
     };
 
-    fastnav.actions = actions;
+    fastnav.actions = new Map();
     fastnav.searchField = searchField;
     fastnav.createAction = createAction;
 })();
