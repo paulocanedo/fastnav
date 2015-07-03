@@ -58,7 +58,6 @@
     });
 
     self.port.on('show', () => {
-        searchField.value = '';
         searchField.focus();
 
         listManager.update();

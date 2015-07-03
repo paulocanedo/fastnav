@@ -43,9 +43,10 @@
                 resultList.appendChild(action.refreshDOM());
             },
             update(search = '*all*') {
+                this.moveSelection(SELECT_NONE);
+                
                 currentList = [];
                 resultList.innerHTML = '';
-                this.moveSelection(SELECT_NONE);
 
                 if(search.length > 0 && search !== '*all*') {
                     let action = actions.get('default');
