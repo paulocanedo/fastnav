@@ -16,6 +16,7 @@
         var _tabId = '';
         var _favicon = '';
         var _selected = false;
+        var _listIndex = -1;
 
         var domCreated = false;
         var elements = {};
@@ -54,13 +55,11 @@
             element.addEventListener('mouseleave', evt => installListeners.setSelected(action, false));
         };
 
-        installListeners.setSelected = (what, flag) => {
-            what.selected = flag;
-            what.refreshDOM();
-
+        installListeners.setSelected = (action, flag) => {
             observer.fire('selectionChanged', {
-                oldSelectedIndex: -1,//TODO find it
-                selectedIndex: -1//TODO find it
+                oldSelectedIndex: fastnav.list_manager.selectedIndex,
+                selectedIndex: action.listIndex,
+                scrollNeeded: false
             });
         };
 
@@ -74,6 +73,7 @@
             get tabId() { return _tabId; },
             get favicon() { return _favicon; },
             get selected() { return _selected; },
+            get listIndex() { return _listIndex; },
 
             get dom() { return elements.li; },
 
@@ -83,6 +83,7 @@
             set tabId(tabId) { _tabId = tabId; },
             set favicon(favicon) { _favicon = favicon; },
             set selected(selected) { _selected = selected; },
+            set listIndex(listIndex) { _listIndex = listIndex; },
 
             createDOM() {
                 elements = {};

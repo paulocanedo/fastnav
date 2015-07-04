@@ -17,10 +17,12 @@
         var _selectedIndex = -1;
 
         observer.subscribe('selectionChanged', (what, param) => {
-            updateSelection(param.oldSelectedIndex, param.selectedIndex);
-        });
+          // param.scrollNeeded
+            // updateSelection(param.oldSelectedIndex, param.selectedIndex);
+            let oldSelectedIndex = param.oldSelectedIndex;
+            let selectedIndex = param.selectedIndex;
+            let scrollNeeded = param.scrollNeeded;
 
-        var updateSelection = (oldSelectedIndex, selectedIndex) => {
             if(oldSelectedIndex >= 0) {
                 let oldAction = currentList[oldSelectedIndex];
                 oldAction.selected = false;
@@ -31,9 +33,13 @@
                 _actionSelected = currentList[selectedIndex];
                 _actionSelected.selected = true;
                 let dom = _actionSelected.refreshDOM();
-                dom.scrollIntoView(false);
+
+                if(scrollNeeded) {
+                  dom.scrollIntoView(false);
+                }
             }
-        };
+            _selectedIndex = selectedIndex;
+        });
 
         return {
             get selectedIndex() {
@@ -46,6 +52,7 @@
                 _actionSelected = actionSelected;
             },
             actionFiltered(action) {
+                action.listIndex = currentList.length;
                 currentList.push(action);
                 resultList.appendChild(action.refreshDOM());
             },
@@ -85,34 +92,23 @@
                 //todo
             },
             moveSelection(where) {
-                let oldItem = resultList.childNodes.item(_selectedIndex);
-                let oldSelectedIndex = _selectedIndex;
+                let newSelectionIndex = _selectedIndex;
 
-                if(where === SELECT_NONE) {
-                    this.noSelection();
-                } else if(where === SELECT_DOWN) {
-                    this.moveSelectionDown();
-                } else if(where === SELECT_UP) {
-                    this.moveSelectionUp();
+                if(where === SELECT_DOWN &&
+                  (_selectedIndex + 1 < resultList.childNodes.length)) {
+                    newSelectionIndex++;
+                } else if (where === SELECT_UP &&
+                  (_selectedIndex > 0)) {
+                    newSelectionIndex--;
+                } else {
+                    newSelectionIndex = -1;
                 }
 
                 observer.fire('selectionChanged', {
-                    oldSelectedIndex: oldSelectedIndex,
-                    selectedIndex: _selectedIndex
+                    oldSelectedIndex: _selectedIndex,
+                    selectedIndex: newSelectionIndex,
+                    scrollNeeded: true
                 });
-            },
-            moveSelectionDown() {
-                if(_selectedIndex + 1 < resultList.childNodes.length) {
-                    _selectedIndex++;
-                }
-            },
-            moveSelectionUp() {
-                if(_selectedIndex > 0) {
-                    _selectedIndex--;
-                }
-            },
-            noSelection() {
-                _selectedIndex = -1;
             }
         };
     })();
