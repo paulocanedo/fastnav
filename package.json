@@ -2,7 +2,7 @@
   "id": "fastnavigation@paulocanedo.com",
   "title": "Fast Navigation",
   "name": "fastnavigation",
-  "version": "0.4.56",
+  "version": "0.5.57",
   "description": "An add-on that provide you all functionalities at same place, Just press Ctrl+Shift+Space",
   "main": "index.js",
   "author": "Paulo Canedo",
