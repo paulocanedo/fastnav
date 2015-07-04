@@ -16,9 +16,7 @@
         var _actionSelected;
         var _selectedIndex = -1;
 
-        observer.subscribe('selectionChanged', (what, param) => {
-          // param.scrollNeeded
-            // updateSelection(param.oldSelectedIndex, param.selectedIndex);
+        observer.subscribe('selectionChanged', param => {
             let oldSelectedIndex = param.oldSelectedIndex;
             let selectedIndex = param.selectedIndex;
             let scrollNeeded = param.scrollNeeded;

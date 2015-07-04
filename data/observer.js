@@ -20,10 +20,10 @@
                     collection.delete(handler);
                 }
             },
-            fire(what, param) {
+            fire(what, params) {
                 let collection = handlers.get(what);
                 if(collection) {
-                    collection.forEach(handler => handler(what, param));
+                    collection.forEach(handler => handler(params));
                 }
             }
         };
