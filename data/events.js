@@ -5,6 +5,16 @@
     const createAction = fastnav.createAction;
     const listManager = fastnav.list_manager;
     const searchField = fastnav.searchField;
+    const observer = fastnav.observer;
+
+    observer.subscribe('selectionChanged', params => {
+      let action = listManager.getAction(params.selectedIndex);
+      let selectedIndex = params.selectedIndex;
+
+      if(selectedIndex >= 0 && action.type === 'tab') {
+        self.port.emit('action-performed', action, searchField.value, true);
+      }
+    });
 
     self.port.on('tab-opened', (elem) => {
         let action = createAction('cmd_activate', elem.title, elem.url, 'tab', 'angle-double-right');
@@ -60,6 +70,6 @@
     self.port.on('show', () => {
         searchField.focus();
 
-        listManager.update();
+        // listManager.update();
     });
 })();

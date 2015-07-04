@@ -16,10 +16,8 @@
         var _actionSelected;
         var _selectedIndex = -1;
 
-        observer.subscribe('selectionChanged', param => {
-            let oldSelectedIndex = param.oldSelectedIndex;
-            let selectedIndex = param.selectedIndex;
-            let scrollNeeded = param.scrollNeeded;
+        observer.subscribe('selectionChanged', param => {          
+            let {oldSelectedIndex, selectedIndex, scrollNeeded} = param;
 
             if(oldSelectedIndex >= 0) {
                 let oldAction = currentList[oldSelectedIndex];
@@ -48,6 +46,9 @@
             },
             set actionSelected(actionSelected) {
                 _actionSelected = actionSelected;
+            },
+            getAction(index) {
+                return currentList[index];
             },
             actionFiltered(action) {
                 action.listIndex = currentList.length;

@@ -13,6 +13,7 @@ const { getFavicon } = require("sdk/places/favicon");
 
 var resultPanel = null;
 var aboutPanel = null;
+var currentTab = tabs.activeTab;
 
 tabs.on('ready', (tab) => {
     resultPanel.port.emit('tab-ready', {
@@ -97,7 +98,15 @@ for(let tab of tabs) {
     });
 }
 
-resultPanel.on('show', () => resultPanel.port.emit('show'));
+resultPanel.on('show', () => {
+    currentTab = tabs.activeTab;
+    resultPanel.port.emit('show');
+});
+
+resultPanel.on('hide', () => {
+    currentTab.activate();
+});
+
 aboutPanel.port.emit('metadata', metadata);
 
 resultPanel.port.on('get-history', text => {
@@ -118,7 +127,7 @@ resultPanel.port.on('get-bookmarks', text => {
     });
 });
 
-resultPanel.port.on('action-performed', (action, text) => {
+resultPanel.port.on('action-performed', (action, text, simulate) => {
     let { id, command, url } = action;
     switch (command) {
         case 'cmd_default':
@@ -155,6 +164,10 @@ resultPanel.port.on('action-performed', (action, text) => {
             for(let tab of tabs) {
                 if(tab.id === action.tabId) {
                     tab.activate();
+                    resultPanel.port.emit('show');
+                    if(!simulate) {
+                      currentTab = tab;
+                    }
                 }
             }
             break;
@@ -185,7 +198,7 @@ resultPanel.port.on('action-performed', (action, text) => {
 
     if(command === 'cmd_exit') {
         system.exit();
-    } else {
+    } else if(simulate !== true) {
         resultPanel.hide();
     }
 });
