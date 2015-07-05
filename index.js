@@ -21,10 +21,6 @@ tabs.on('ready', (tab) => {
         title: tab.title,
         url:   tab.url
     });
-
-    getFavicon(tab).then((url) => {
-        resultPanel.port.emit('tab-favicon-ready', {tabId: tab.id, faviconUrl: url});
-    });
 });
 
 tabs.on('open', (tab) => {
@@ -98,6 +94,21 @@ for(let tab of tabs) {
     });
 }
 
+resultPanel.port.on('ask-favicon', action => {
+    let ctab;
+    for(let tab of tabs) {
+        if(tab.id === action.tabId) {
+            ctab = tab;
+            break;
+        }
+    }
+    if(!ctab) return;
+
+    getFavicon(ctab).then((url) => {
+        resultPanel.port.emit('tab-favicon-ready', {tabId: ctab.id, faviconUrl: url});
+    });
+});
+
 resultPanel.on('show', () => {
     currentTab = tabs.activeTab;
     resultPanel.port.emit('show');
@@ -163,8 +174,11 @@ resultPanel.port.on('action-performed', (action, text, simulate) => {
         case 'cmd_activate':
             for(let tab of tabs) {
                 if(tab.id === action.tabId) {
+                    // if(simulate === false || (tab.readyState !== 'interactive' && tab.readyState !== 'complete')) {
                     tab.activate();
-                    resultPanel.port.emit('show');
+                    // }
+
+                    resultPanel.port.emit('show'); //workaround to fix focus on search field
                     if(!simulate) {
                       currentTab = tab;
                     }

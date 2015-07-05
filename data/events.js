@@ -24,6 +24,8 @@
         let tabs = actions.get('tabs');
         tabs.add(action);
         listManager.actionFiltered(action);
+        
+        self.port.emit('ask-favicon', action);
     });
 
     self.port.on('tab-closed', (elem) => {
@@ -40,6 +42,8 @@
         action.description = elem.url;
         action.url = elem.url;
         action.refreshDOM();
+
+        self.port.emit('ask-favicon', action);
     });
 
     self.port.on('tab-favicon-ready', (elem) => {
