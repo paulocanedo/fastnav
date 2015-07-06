@@ -16,7 +16,7 @@
         var _actionSelected;
         var _selectedIndex = -1;
 
-        observer.subscribe('selectionChanged', param => {          
+        observer.subscribe('selectionChanged', param => {
             let {oldSelectedIndex, selectedIndex, scrollNeeded} = param;
 
             if(oldSelectedIndex >= 0) {
@@ -37,6 +37,8 @@
             _selectedIndex = selectedIndex;
         });
 
+
+
         return {
             get selectedIndex() {
                 return _selectedIndex;
@@ -55,17 +57,10 @@
                 currentList.push(action);
                 resultList.appendChild(action.refreshDOM());
             },
-            update(search = '*all*') {
+            update(search) {
                 this.moveSelection(SELECT_NONE);
-
                 currentList = [];
                 resultList.innerHTML = '';
-
-                if(search.length > 0 && search !== '*all*') {
-                    let action = actions.get('default');
-                    action.description = `Open ${search}`;
-                    this.actionFiltered(action);
-                }
 
                 let filterActions = (search, collection) => {
                     for(let action of collection) {
@@ -79,10 +74,16 @@
                     }
                 };
 
-                filterActions(search, actions.get('cache'));
+                if(search) {
+                    let action = actions.get('default');
+                    action.description = `Open ${search}`;
+                    this.actionFiltered(action);
+
+                    filterActions(search, actions.get('cache'));
+                }
                 filterActions(search, actions.get('tabs'));
 
-                if(search.length > 0) {
+                if(search && search !== ' *all*') {
                     self.port.emit('get-bookmarks', search);
                     self.port.emit('get-history', search);
                 }
@@ -93,9 +94,10 @@
             moveSelection(where) {
                 let newSelectionIndex = _selectedIndex;
 
-                if(where === SELECT_DOWN &&
-                  (_selectedIndex + 1 < resultList.childNodes.length)) {
-                    newSelectionIndex++;
+                if(where === SELECT_DOWN) {
+                    if((_selectedIndex + 1 < resultList.childNodes.length)) {
+                        newSelectionIndex++;
+                    }
                 } else if (where === SELECT_UP &&
                   (_selectedIndex > 0)) {
                     newSelectionIndex--;

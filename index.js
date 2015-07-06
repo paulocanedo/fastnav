@@ -13,7 +13,6 @@ const { getFavicon } = require("sdk/places/favicon");
 
 var resultPanel = null;
 var aboutPanel = null;
-var currentTab = tabs.activeTab;
 
 tabs.on('ready', (tab) => {
     resultPanel.port.emit('tab-ready', {
@@ -110,12 +109,7 @@ resultPanel.port.on('ask-favicon', action => {
 });
 
 resultPanel.on('show', () => {
-    currentTab = tabs.activeTab;
     resultPanel.port.emit('show');
-});
-
-resultPanel.on('hide', () => {
-    currentTab.activate();
 });
 
 aboutPanel.port.emit('metadata', metadata);
@@ -138,8 +132,8 @@ resultPanel.port.on('get-bookmarks', text => {
     });
 });
 
-resultPanel.port.on('action-performed', (action, text, simulate) => {
-    let { id, command, url } = action;
+resultPanel.port.on('action-performed', (action, text) => {
+    let { command, url } = action;
     switch (command) {
         case 'cmd_default':
             tabs.activeTab.url = text;
@@ -174,14 +168,7 @@ resultPanel.port.on('action-performed', (action, text, simulate) => {
         case 'cmd_activate':
             for(let tab of tabs) {
                 if(tab.id === action.tabId) {
-                    // if(simulate === false || (tab.readyState !== 'interactive' && tab.readyState !== 'complete')) {
                     tab.activate();
-                    // }
-
-                    resultPanel.port.emit('show'); //workaround to fix focus on search field
-                    if(!simulate) {
-                      currentTab = tab;
-                    }
                 }
             }
             break;
@@ -212,7 +199,7 @@ resultPanel.port.on('action-performed', (action, text, simulate) => {
 
     if(command === 'cmd_exit') {
         system.exit();
-    } else if(simulate !== true) {
+    } else {
         resultPanel.hide();
     }
 });

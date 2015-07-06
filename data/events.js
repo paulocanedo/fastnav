@@ -12,7 +12,7 @@
       let selectedIndex = params.selectedIndex;
 
       if(selectedIndex >= 0 && action.type === 'tab') {
-        self.port.emit('action-performed', action, searchField.value, true);
+        // self.port.emit('action-performed', action, searchField.value, true);
       }
     });
 
@@ -24,7 +24,7 @@
         let tabs = actions.get('tabs');
         tabs.add(action);
         listManager.actionFiltered(action);
-        
+
         self.port.emit('ask-favicon', action);
     });
 

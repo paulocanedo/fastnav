@@ -123,7 +123,7 @@
                 elements.li.className   = getClassName('li', this);
                 elements.icon.className = getClassName('icon', this);
                 elements.textTitle.nodeValue = getTextNonNull(this.title, `No title`);
-                elements.textDescription.nodeValue = getTextNonNull(this.description, `***`);
+                elements.textDescription.nodeValue = getTextNonNull(this.description, ` `);
                 elements.divMain.style.backgroundImage = `url('${this.favicon}')`;
 
                 return elements.li;
