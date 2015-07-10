@@ -1,10 +1,11 @@
 @font-face {
-  font-family: "Ubuntu", serif;
+  font-family: "Ubuntu Light", serif;
   src: local("Ubuntu"),
        url(http://fonts.googleapis.com/css?family=Ubuntu:400,300,700,500);
 }
 
 html, body {
+    font-family: "Ubuntu Light", serif;
     font-size: 21px;
     overflow: hidden;
 }
