@@ -1,11 +1,28 @@
 @font-face {
-  font-family: "Ubuntu Light", serif;
-  src: local("Ubuntu"),
-       url(http://fonts.googleapis.com/css?family=Ubuntu:400,300,700,500);
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Ubuntu Light'), local('Ubuntu-Light'), url(fonts/ubuntu_light.woff);
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu'), url(../fonts/ubuntu.woff);
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Ubuntu Bold'), local('Ubuntu-Bold'), url(../fonts/ubuntu_bold.woff);
+}
+
+* {
+    font-family: Ubuntu
+    font-weight: lighter;
 }
 
 html, body {
-    font-family: "Ubuntu Light", serif;
     font-size: 21px;
     overflow: hidden;
 }
@@ -40,6 +57,7 @@ input {
     margin: 0;
     white-space: nowrap;
     font-weight: lighter;
+    overflow: inherit;
 }
 
 .navigation li h2 {
@@ -47,6 +65,7 @@ input {
     margin: 0;
     white-space: nowrap;
     font-weight: lighter;
+    overflow: inherit;
 }
 
 .navigation .selected {
@@ -57,12 +76,13 @@ input {
 .navigation .ga-li-main {
     flex-grow: 2;
     margin-left: 6px;
-    background-position: center right;
+    padding-right: 25px;
+    background-position: top right;
     background-repeat: no-repeat;
     background-size: 16px, auto, contain;
     overflow: hidden;
 }
 
 .navigation .ga-icon {
-    margin-top: 0.2em;
+    /*margin-top: 6px;*/
 }
