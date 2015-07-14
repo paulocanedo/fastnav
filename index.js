@@ -117,7 +117,7 @@ aboutPanel.port.emit('metadata', metadata);
 resultPanel.port.on('get-history', text => {
     history.search(
       { query: text },
-      { sort:  "date", count: 50 }
+      { sort:  "date", count: 50, descending: true }
     ).on("end", function (results) {
         resultPanel.port.emit('get-history-ready', results);
     });
