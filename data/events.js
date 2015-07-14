@@ -53,18 +53,18 @@
         action.refreshDOM();
     });
 
-    self.port.on('get-history-ready', results => {
+    self.port.on('get-bookmarks-ready', results => {
         results.forEach(elem => {
-            let action = createAction('cmd_open', elem.title, elem.url, 'history', 'history');
+            let action = createAction('cmd_open', elem.title, elem.url, 'bookmark', 'star');
             action.url = elem.url;
 
             listManager.actionFiltered(action);
         });
     });
 
-    self.port.on('get-bookmarks-ready', results => {
+    self.port.on('get-history-ready', results => {
         results.forEach(elem => {
-            let action = createAction('cmd_open', elem.title, elem.url, 'bookmark', 'bookmark');
+            let action = createAction('cmd_open', elem.title, elem.url, 'history', 'history');
             action.url = elem.url;
 
             listManager.actionFiltered(action);
