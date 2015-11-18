@@ -114,21 +114,26 @@ resultPanel.on('show', () => {
 
 aboutPanel.port.emit('metadata', metadata);
 
-resultPanel.port.on('get-history', text => {
-    history.search(
-      { query: text },
-      { sort:  "date", count: 50, descending: true }
-    ).on("end", function (results) {
-        resultPanel.port.emit('get-history-ready', results);
-    });
-});
-
-resultPanel.port.on('get-bookmarks', text => {
+resultPanel.port.on('get-data', search => {
     bookmarks.search(
-      { query: text },
+      { query: search },
       { sort:  "title" }
-    ).on("end", function (results) {
-        resultPanel.port.emit('get-bookmarks-ready', results);
+    ).on("end", results => {
+        results.forEach(elem => {
+            elem.type = 'bookmark';
+            elem.icon = 'star';
+        });
+
+        history.search(
+          { query: search },
+          { sort:  "date", count: 50, descending: true }
+        ).on("end", results2 => {
+            results2.forEach(elem => {
+                elem.type = 'history';
+                elem.icon = 'history';
+            });
+            resultPanel.port.emit('get-data-ready', results.concat(results2));
+        });
     });
 });
 

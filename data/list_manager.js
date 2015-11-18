@@ -84,8 +84,7 @@
                 filterActions(search, actions.get('tabs'));
 
                 if(search && search !== ' *all*') {
-                    self.port.emit('get-bookmarks', search);
-                    self.port.emit('get-history', search);
+                    self.port.emit('get-data', search);
                 }
             },
             remove(dom) {
