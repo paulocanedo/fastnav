@@ -10,6 +10,8 @@ const bookmarks = require("sdk/places/bookmarks");
 const system    = require("sdk/system");
 const { data }  = require("sdk/self");
 const { getFavicon } = require("sdk/places/favicon");
+const timers    = require('sdk/timers');
+const winUtils  = require('sdk/window/utils');
 
 var resultPanel = null;
 var aboutPanel = null;
@@ -145,6 +147,13 @@ resultPanel.port.on('action-performed', (action, text) => {
             break;
         case 'cmd_newtab':
             tabs.open('about:newtab');
+            // Focus the location bar after a spin of the event loop, because
+            // Firefox focuses something else (presumably the browser element
+            // for the new tab) after this, and focusing the location bar now
+            // would race that change of focus.
+            timers.setImmediate(function() {
+              winUtils.getMostRecentBrowserWindow().document.getElementById('urlbar').focus();
+            });
             break;
         case 'cmd_new-window':
             tabs.open({url: 'about:newtab', inNewWindow: true});
